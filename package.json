@@ -8,9 +8,15 @@
       "typescript": "3.3.3333"
    },
    "dependencies": {
-      "typeorm": "0.2.31",
+      "bcryptjs": "^2.4.3",
+      "config": "^3.3.6",
+      "express": "^4.17.1",
+      "express-validator": "^6.10.0",
+      "jsonwebtoken": "^8.5.1",
+      "pg": "^8.4.0",
       "reflect-metadata": "^0.1.10",
-      "pg": "^8.4.0"
+      "typeorm": "0.2.31",
+      "path": "0.12.7"
    },
    "scripts": {
       "start": "ts-node src/index.ts"
