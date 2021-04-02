@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany, BaseEntity } from "typeorm";
+import { Entity, CreateDateColumn,PrimaryGeneratedColumn, Column, ManyToMany,ManyToOne, BaseEntity } from "typeorm";
 import { Program } from "./program";
 import { Role } from "./role";
+import * as bcrypt from "bcryptjs";
 
 @Entity()
 export class User extends BaseEntity {   // changed
@@ -8,8 +9,10 @@ export class User extends BaseEntity {   // changed
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToMany(() => Role, role => role.user)
-  role: Role  // Role[]
+
+  @ManyToOne(() => Role, (role: Role) => role.users)     
+  public role: Role;
+  
 
   @Column({ default: '' })
   userName: string;
@@ -19,13 +22,22 @@ export class User extends BaseEntity {   // changed
 
   @Column({ default: '' })
   password: string;
+  
 
   @Column({ default: 0.0 })
   age: number;
 
-  // @CreateDateColumn();
+  @Column()
+  @CreateDateColumn()
+  createdAt: Date;
 
   @ManyToMany(() => Program, program => program.users)
   programs: Program[];
 
+  @Column()
+  salt: number;
+  
+  
 }
+// const salt = 10
+// let hashPassword = await bcrypt.hash(password, salt)

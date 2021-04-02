@@ -1,23 +1,36 @@
-import { Router as ExpresRouter } from 'express'
+import { Router as ExpressRouter } from 'express'
 import UserController from '../Controllers/auth.controller'
 
 
-const router = new ExpresRouter
+
 
 
 export default class AuthRoute {
   private userController;
-  private router
+  private router;
 
   constructor() {
     this.userController = new UserController();
-    this.router = ExpresRouter()
+    this.router = ExpressRouter()
+    // this.router = express.Router()
   }
 
-  getRouters() {
+  public getRouters() {
 
-    router.post('auth/registration', (req, res) => { this.userController.registration(req, res) })
+    this
+    .router.post('/registration', (req, res) => {
+      console.log('work')
+      this.userController.registration(req, res) });
+      
+
+     this 
+    .router.post('/login', (req, res) => {
+      this.userController.login(req,res) });
+      
+    return this.router
   }
+
+
 
 }
 

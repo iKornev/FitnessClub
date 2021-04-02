@@ -1,23 +1,39 @@
+import { check } from "express-validator";
+import { Role } from "../Entity/role";
 import UserService from "../Services/auth.service"
 
 export default class UserController {
 
-  userService
+  private userService: UserService;
 
   constructor() {
     this.userService = new UserService()
   }
 
-  async registration(req, res) {
+  public async registration(req, res) {
+    console.log(req.body)
 
     try {
-      let { name, password, email } = req.body;
-      let result = await this.userService.registration(name, password, email)
-      res.send(200)
+      let { name, password, email, role } = req.body;
+      let result = await this.userService.registration(name, password, email, role)
+      res.sendStatus(200)
     } catch (error) {
-      res.send(500)
+      res.sendStatus(500)
       console.log(error);
 
     }
+  }
+
+  public async login(req, res) {
+    try {
+      let { email, password } = req.body;
+      await this.userService.login(email, password)
+      res.sendStatus(200)
+
+    } catch (error) {
+      res.sendStatus(401)
+      console.log(error)
+    }
+
   }
 }
