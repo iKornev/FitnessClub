@@ -3,13 +3,19 @@ import { createConnection } from "typeorm";
 import * as express from "express";
 import AuthRoute from "./Routes/auth.routes";
 import ProgramRoute from "./Routes/programs.routes";
-
+import * as passport from "passport"
 
 
 
 const app = express();
 const port = 5000;
 app.use(express.json());
+
+
+app.use(passport.initialize())
+require('./middleware/passport')(passport)
+
+
 // createConnection()
 //   .then(async connection => {
 
@@ -80,14 +86,15 @@ app.use(express.json());
 async function start() {
   try {
     const connection = await createConnection()
-    
+
     // const authRoute = new AuthRoute();
-    app.use(function (req, res, next){
+    app.use(function (req, res, next) {
       res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-Width, Content-Type, Accept");
       next();
     })
-    
+
+
 
     app.use('/program', new ProgramRoute().getRouters())
     app.use('/auth', new AuthRoute().getRouters())

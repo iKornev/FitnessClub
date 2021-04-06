@@ -45,6 +45,7 @@ export default class UserService {
     const candidate = await getRepository(User).findOne({ email })
 
     let token = {}
+    if (!candidate){console.log('User not found')}
     if (candidate) {
 
 

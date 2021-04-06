@@ -1,9 +1,12 @@
 import { Router as ExpressRouter } from 'express'
+import * as passport from 'passport'
+
 // import ProgramController from '../Controllers/program.controller'
 
 
 export default class ProgramRoute {
   private programController;
+  
   private router;
 
   constructor() {
@@ -15,10 +18,10 @@ export default class ProgramRoute {
   public getRouters() {
 
     this
-    .router.get('/programs', (req, res) => {
+    .router.get('/programs', passport.authenticate('jwt', {session:false}),(req, res) => {
       // console.log('work')
       // this.programController.getAll(req, res) 
-    return res.json({"programs":"sorry mazafaka there is no program"})
+    return res.json({"programs":"sorry there is no program"})
     
     });
       
