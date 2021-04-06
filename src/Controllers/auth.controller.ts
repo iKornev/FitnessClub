@@ -1,5 +1,3 @@
-import { check } from "express-validator";
-import { Role } from "../Entity/role";
 import UserService from "../Services/auth.service"
 
 export default class UserController {
@@ -27,8 +25,10 @@ export default class UserController {
   public async login(req, res) {
     try {
       let { email, password } = req.body;
-      await this.userService.login(email, password)
-      res.sendStatus(200)
+      let token = await this.userService.login(email, password)
+      res.status(200).json({
+        token: `Bearer ${token}`
+      })
 
     } catch (error) {
       res.sendStatus(401)

@@ -2,9 +2,6 @@ import { Router as ExpressRouter } from 'express'
 import UserController from '../Controllers/auth.controller'
 
 
-
-
-
 export default class AuthRoute {
   private userController;
   private router;
@@ -12,7 +9,7 @@ export default class AuthRoute {
   constructor() {
     this.userController = new UserController();
     this.router = ExpressRouter()
-    // this.router = express.Router()
+    
   }
 
   public getRouters() {
@@ -25,7 +22,10 @@ export default class AuthRoute {
 
      this 
     .router.post('/login', (req, res) => {
+      console.log('work')
       this.userController.login(req,res) });
+
+      
       
     return this.router
   }

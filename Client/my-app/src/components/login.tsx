@@ -26,7 +26,7 @@ function Login() {
       alert("Invalid Input")
     }
 
-    fetch('http://localhost:5000/auth/registration', {
+    fetch('http://localhost:5000/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: info

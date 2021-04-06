@@ -1,10 +1,9 @@
-import { createHash } from "crypto";
-import { check } from "express-validator";
-import { resolve } from "url";
 import { Role } from "../Entity/role";
 import { User } from "../Entity/user";
 import * as bcrypt from "bcryptjs";
 import { getRepository } from "typeorm";
+import * as jwt from "jsonwebtoken";
+
 
 // const salt = 10
 export default class UserService {
@@ -16,13 +15,14 @@ export default class UserService {
 
   }
 
-  async registration(name: string, password: string, email: string, role:Role) {
+  async registration(name: string, password: string, email: string, role: Role) {
 
     // User Creation  
     let salt = 10
     let hashPassword = await bcrypt.hash(password, salt)
-    // let user = await User.create({ email, password:hashPassword, userName:name , role})
-    
+
+    // Проверка существования пользователя
+    // const canidate = await getRepository(User).findOne({ email })
 
     let user = new User();
     user.userName = name;
@@ -38,21 +38,40 @@ export default class UserService {
   }
 
 
-  async login(password:string, email:string) {
+  async login(email: string, password: string) {
 
     //User Login
-    
-    const user = await getRepository(User).findOne({ email })
-    if(user){
-      const hashClietPassword = await bcrypt.hash(password, user.salt)
-      // const check = await bcrypt.compare(password, user.password)
-      if (hashClietPassword  ===  user.password) {
-        return true
+
+    const candidate = await getRepository(User).findOne({ email })
+
+    let token = {}
+    if (candidate) {
+
+
+      console.log(password, candidate.password)
+
+
+
+      const passwordResult = await bcrypt.compare(password, candidate.password)
+      console.log('Hello ' + passwordResult)
+      if (passwordResult) {
+        // Token Generation 
+
+        token = jwt.sign({
+          email: candidate.email
+        },
+          'dev-jwt',
+          { expiresIn: 60 * 60 }
+        )
+        console.log(token)
+
+        
       }
-      
 
     }
-    return false
+    return token
   }
 }
+
+
 

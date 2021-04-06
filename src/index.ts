@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { createConnection } from "typeorm";
 import * as express from "express";
 import AuthRoute from "./Routes/auth.routes";
+import ProgramRoute from "./Routes/programs.routes";
 
 
 
@@ -88,7 +89,7 @@ async function start() {
     })
     
 
-
+    app.use('/program', new ProgramRoute().getRouters())
     app.use('/auth', new AuthRoute().getRouters())
     app.listen(port, () => console.log(`App has been started on port ${port} `))
   } catch (error) {
