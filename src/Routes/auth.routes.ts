@@ -9,24 +9,26 @@ export default class AuthRoute {
   constructor() {
     this.userController = new UserController();
     this.router = ExpressRouter()
-    
+
   }
 
   public getRouters() {
 
     this
-    .router.post('/registration', (req, res) => {
-      console.log('work')
-      this.userController.registration(req, res) });
-      
+      .router.post('/registration', (req, res) => {
+        console.log('work')
+        this.userController.registration(req, res)
+      });
 
-     this 
-    .router.post('/login', (req, res) => {
-      console.log('work')
-      this.userController.login(req,res) });
 
-      
-      
+    this
+      .router.post('/login', (req, res) => {
+        console.log('work')
+        this.userController.login(req, res)
+      });
+
+
+
     return this.router
   }
 

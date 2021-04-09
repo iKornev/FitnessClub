@@ -4,6 +4,9 @@ import * as express from "express";
 import AuthRoute from "./Routes/auth.routes";
 import ProgramRoute from "./Routes/programs.routes";
 import * as passport from "passport"
+import { Program } from "./Entity/program";
+import { Exercise } from "./Entity/exercise";
+import { User } from "./Entity/user";
 
 
 
@@ -42,19 +45,20 @@ require('./middleware/passport')(passport)
 //     const checkUsers = await connection.manager.find(User)
 //     console.log("Loaded users: \n", checkUsers)
 
-//     // //Program Creation
-//     // const program = new Program();
-//     // program.name = "Some program";
-//     // program.description = "Description of the program";
-//     // program.duration = "30 days";
-//     // program.exercisesName = Exercise[1];
-//     // program.users = User[14]
+    //Program Creation
+    // const program = new Program();
+    // program.name = "Some program";
+    // program.description = "Description of the program";
+    // program.duration = "30 days";
+    // // program.exercisesName = Exercise[1];
+    // // program.users = User[14]
+    
 
-//     // await connection.manager.save(program);
-//     // console.log("Saved a new program with id: " + program.id);
-//     // console.log("Loading programs from the database...");
-//     // const programs = await connection.manager.find(Program);
-//     // console.log("Loaded programs: \n", programs);
+    // await connection.manager.save(program);
+    // console.log("Saved a new program with id: " + program.id);
+    // console.log("Loading programs from the database...");
+    // const programs = await connection.manager.find(Program);
+    // console.log("Loaded programs: \n", programs);
 
 //     // // Role Creation
 //     // const role = new Role();
@@ -79,7 +83,7 @@ require('./middleware/passport')(passport)
 
 
 
-//   }).catch(error => console.log(error));
+  // }).catch(error => console.log(error));
 
 //Start Server
 

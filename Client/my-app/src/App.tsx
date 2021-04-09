@@ -1,21 +1,26 @@
 import React from "react";
 import { Navbar } from "./components/navbar";
-import Auth from "./components/autx";
-import Login from "./components/login";
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./components/AppRouter";
+
 
 
 const App: React.FC = () => {
   return (
-    <div>
-      <Navbar/>
-      <div>
-        <Auth />
-        <br />
-        <br />
-        <br />
-        <Login />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <AppRouter />
+      {/* <div>
+        <Navbar />
+        <div>
+          <Auth />
+          <br />
+          <br />
+          <br />
+          <Login />
+        </div>
+      </div> */}
+    </BrowserRouter>
   );
 }
 

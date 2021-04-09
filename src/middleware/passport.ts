@@ -51,10 +51,9 @@ console.log(user)
       } else {
         done(null, false)
       }
-    } catch(e){
+    } catch (e) {
       console.log(e)
     }
     
-
   }))
 }

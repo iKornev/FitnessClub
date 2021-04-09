@@ -7,9 +7,6 @@ import * as jwt from "jsonwebtoken";
 
 // const salt = 10
 export default class UserService {
-  // userName: string;
-  // userEmail: string;
-  // userPassword: string;
 
   constructor() {
 

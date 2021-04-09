@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany, JoinTable } from "typeorm";
+import { Entity, CreateDateColumn, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany, JoinTable } from "typeorm";
 import { Exercise } from "./exercise";
 import { User } from "./user";
 
@@ -14,8 +14,9 @@ export class Program {
   @Column()
   description: string;
 
-  // @CreateDateColumn();
-
+  @Column()
+  @CreateDateColumn()
+  createdAt: Date;
 
   @Column()
   duration: string;
