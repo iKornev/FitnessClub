@@ -2,6 +2,8 @@ import { Router as ExpressRouter } from 'express'
 import * as passport from 'passport'
 import ProgramController from '../Controllers/program.controller'
 
+// passport.authenticate('jwt', { session: false })
+
 
 export default class ProgramRoute {
   private programController;
